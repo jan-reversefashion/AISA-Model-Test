@@ -92,6 +92,11 @@ def apply_model_on_ds(
             )
 
     for sample in tqdm(ds):
+        if sample[target_field] is None:
+            continue
+        if len(sample[target_field]) == 0:
+            continue
+
         file_id = sample.filepath.split("/")[-1]
         image_path = f"data/samples/{file_id}"
 
@@ -115,11 +120,7 @@ def apply_model_on_ds(
             product_type_pos = torch.argmax(text_probs).item()
             res = candidate_labels[product_type_pos]
 
-        if target_field == "Category three":
-            results.append(res.split(" ")[-1])
-        else:
-            results.append(res)
-
+        results.append(res)
         labels.append(sample[target_field][0])
         file_ids.append(file_id)
 
