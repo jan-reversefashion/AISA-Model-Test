@@ -5,7 +5,6 @@ from tqdm import tqdm
 import pandas as pd
 import open_clip
 from PIL import Image
-import torchvision
 from torchvision.transforms import v2
 
 # google/siglip2-base-patch16-224     0.788
